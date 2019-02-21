@@ -13,5 +13,5 @@ jobs:
     - checkout # check out the code in the project directory
     - run: sudo apt-get update
     - run: sudo apt-get install mysql-client
-    - run: |
-    mysql -hlocalhost -uroot -ve "CREATE USER 'spring'@'localhost' IDENTIFIED BY 'spring'"
+    - run: mysql -hlocalhost -uroot -ve "CREATE USER 'spring'@'localhost' IDENTIFIED BY 'spring'"
+
