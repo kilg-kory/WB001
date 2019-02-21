@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/WB001
     docker: # use the docker executor type; machine and macos executors are also supported
-    - image: jdk-stretch-node-browsers-legacy
+    - image: circleci/openjdk
     - image: circleci/mariadb:10
       envirmoment:
         MYSQL_ALLOW_EMPTY_PASSWORD: yes
