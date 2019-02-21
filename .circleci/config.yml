@@ -22,8 +22,7 @@ jobs:
 
     - run: mysql -h 127.0.0.1 -u root -e "select user from mysql.user;"
 
-
-
+    - run: mysql -h 127.0.0.1 -uspring -pspring --database=springdb -e "show databases;"
 
     - restore_cache: # restore the saved cache after the first run or if `pom.xml` has changed
         # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
