@@ -12,10 +12,36 @@ jobs:
     steps:
     - checkout # check out the code in the project directory
     - run: sudo apt-get update
+
     - run: sudo apt-get install mysql-client
 
     - run:
         name: Mysql database
         command: mysql -h 127.0.0.1 -u root -e "CREATE USER 'spring'@'localhost' IDENTIFIED BY 'spring'"
 
+    - run:
+        name: jacoco
+        command: mvn
 
+    - restore_cache: # restore the saved cache after the first run or if `pom.xml` has changed
+        # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
+        key: circleci-wb-java-spring-{{ checksum "pom.xml" }}
+
+    - run: mvn dependency:go-offline # gets the project dependencies
+
+    - save_cache: # saves the project dependencies
+        paths:
+        - ~/.m2
+        key: circleci-wb-java-spring-{{ checksum "pom.xml" }}
+
+    - run: mvn package # run the actual tests
+
+    - store_test_results: # uploads the test metadata from the `target/surefire-reports` directory so that it can show up in the CircleCI dashboard.
+        # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
+        path: target/surefire-reports
+
+
+        #    - store_artifacts: # store the uberjar as an artifact
+        # Upload test summary for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
+    #        path: target/demo-java-spring-0.0.1-SNAPSHOT.jar
+    # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
