@@ -6,22 +6,18 @@ jobs:
     - image: circleci/openjdk
     - image: circleci/mariadb:10
       envirmoment:
-        MYSQL_ALLOW_EMPTY_PASSWORD: yes
-        MYSQL_ROOT_PASSWORD: ''
+        #        MYSQL_ALLOW_EMPTY_PASSWORD: yes
+        #        MYSQL_ROOT_PASSWORD: ''
+#        MYSQL_ALLOW_EMPTY_PASSWORD: true
+        MYSQL_USER: spring
+        MYSQL_PASSWORD: spring
         MYSQL_DATABASE: springdb
     steps:
     - checkout # check out the code in the project directory
-    - run: sudo apt-get update
-
-    - run: sudo apt-get install mysql-client
-
-
-    - run: mysql -h 127.0.0.1 -u root -e "CREATE USER 'spring'@'localhost' IDENTIFIED BY 'spring';"
-    - run: mysql -h 127.0.0.1 -u root -e " GRANT ALL PRIVILEGES ON springdb.* TO 'spring'@'localhost';"
-
-#    - run:
-#        name: jacoco
-#        command: mvn
+    #    - run: sudo apt-get update
+    #    - run: sudo apt-get install mysql-client
+    #    - run: mysql -h 127.0.0.1 -u root -e "CREATE USER 'spring'@'localhost' IDENTIFIED BY 'spring';"
+    #    - run: mysql -h 127.0.0.1 -u root -e " GRANT ALL PRIVILEGES ON springdb.* TO 'spring'@'localhost';"
 
     - restore_cache: # restore the saved cache after the first run or if `pom.xml` has changed
         # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
