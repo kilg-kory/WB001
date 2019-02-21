@@ -13,4 +13,4 @@ jobs:
     - checkout # check out the code in the project directory
     - run: sudo apt-get update
     - run: sudo apt-get install mysql-client
-    - run: mysql -uroot < ~/WB001/db.sql
+    - run: mysql -hlocalhost -uroot < ~/WB001/db.sql
