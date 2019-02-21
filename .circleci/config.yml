@@ -14,11 +14,11 @@ jobs:
 
     - run: mysql -h 127.0.0.1 -u root -e "CREATE DATABASE spirngdb;"
 
-    - run: mysql -h 127.0.0.1 -u root -e "CREATE USER 'spring'@'localhost' IDENTIFIED BY 'spring';"
+    - run: mysql -h 127.0.0.1 -u root -e "CREATE USER 'spring'@'%' IDENTIFIED BY 'spring';"
 
-    - run: mysql -h 127.0.0.1 -u root -e " GRANT ALL PRIVILEGES ON springdb.* TO 'spring'@'localhost';"
+    - run: mysql -h 127.0.0.1 -u root -e " GRANT ALL PRIVILEGES ON springdb.* TO 'spring'@'%';"
 
-    - run: mysql -h 127.0.0.1 -u root -e "FLUSH PRIVILEGES;;"
+    - run: mysql -h 127.0.0.1 -u root -e "FLUSH PRIVILEGES;"
 
     - run: mysql -h 127.0.0.1 -u root -e "show databases;"
 
