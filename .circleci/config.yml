@@ -19,9 +19,9 @@ jobs:
         name: Mysql database
         command: mysql -h 127.0.0.1 -u root -e "CREATE USER 'spring'@'localhost' IDENTIFIED BY 'spring'"
 
-    - run:
-        name: jacoco
-        command: mvn
+#    - run:
+#        name: jacoco
+#        command: mvn
 
     - restore_cache: # restore the saved cache after the first run or if `pom.xml` has changed
         # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
