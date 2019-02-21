@@ -11,4 +11,6 @@ jobs:
         MYSQL_DATABASE: springdb
     steps:
     - checkout # check out the code in the project directory
-    - run: echo "hello world" # run the `echo` command
+    - run: sudo apt-get update
+    - run: sudo apt-get install mysql-client
+    - run: mysql -uroot < ~/WB001/db.sql
