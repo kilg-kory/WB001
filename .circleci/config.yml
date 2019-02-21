@@ -9,9 +9,11 @@ jobs:
         MYSQL_ALLOW_EMPTY_PASSWORD: yes
         MYSQL_ROOT_PASSWORD: ''
         MYSQL_DATABASE: springdb
+        MYSQL_USER: spring
+        MYSQL_PASS
     steps:
     - checkout # check out the code in the project directory
     - run: sudo apt-get update
     - run: sudo apt-get install mysql-client
-    - run: mysql -hlocalhost -uroot -ve "CREATE USER 'spring'@'localhost' IDENTIFIED BY 'spring'"
+    - run: sudo mysql -ve "CREATE USER 'spring'@'localhost' IDENTIFIED BY 'spring'"
 
