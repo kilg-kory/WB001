@@ -13,4 +13,9 @@ public class WorkBlogApplicationTests {
     public void contextLoads() {
     }
 
+
+    @Test
+    public void applicationContextTest() {
+        WorkBlogApplication.main(new String[] {});
+    }
 }
