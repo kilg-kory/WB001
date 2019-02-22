@@ -6,7 +6,7 @@ jobs:
     working_directory: ~/WB001
     docker: # use the docker executor type; machine and macos executors are also supported
     - image: circleci/openjdk
-    - image: circleci/mariadb:10
+    - image: circleci/mariadb
       environment:
         MYSQL_ALLOW_EMPTY_PASSWORD: true
         MYSQL_USER: root
