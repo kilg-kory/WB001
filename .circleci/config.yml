@@ -7,9 +7,9 @@ jobs:
     docker: # use the docker executor type; machine and macos executors are also supported
     - image: circleci/openjdk
     - image: circleci/mariadb:10
-        environment:
-          MYSQL_USER: root
-          MYSQL_ALLOW_EMPTY_PASSWORD: true
+      environment:
+        MYSQL_USER: root
+        MYSQL_ALLOW_EMPTY_PASSWORD: true
     steps:
     - checkout # check out the code in the project directory
     - run: sudo apt-get update
