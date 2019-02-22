@@ -1,4 +1,6 @@
-version: 2
+version: 2.1
+#orbs:
+#  codecov: codecov/codecov@1.0.2
 jobs:
   build:
     working_directory: ~/WB001
@@ -7,28 +9,24 @@ jobs:
     - image: circleci/mariadb
     steps:
     - checkout # check out the code in the project directory
-
     - run: sudo apt-get update
 
     - run: sudo apt-get install mysql-client
-
+    #    SETUP DB
     - run: mysql -h 127.0.0.1 -u root -e "CREATE DATABASE springdb;"
-
     - run: mysql -h 127.0.0.1 -u root -e "CREATE USER 'spring'@'%' IDENTIFIED BY 'spring';"
-
     - run: mysql -h 127.0.0.1 -u root -e " GRANT ALL PRIVILEGES ON springdb.* TO 'spring'@'%';"
-
     - run: mysql -h 127.0.0.1 -u root -e "FLUSH PRIVILEGES;"
 
-    - run: mysql -h 127.0.0.1 -u root -e "show databases;"
+    #    DEBUG DB
+    #    - run: mysql -h 127.0.0.1 -u root -e "show databases;"
+    #    - run: mysql -h 127.0.0.1 -u root -e "select user from mysql.user;"
+    #    - run: mysql -h 127.0.0.1 -uspring -pspring --database=springdb -e "show databases;"
 
-    - run: mysql -h 127.0.0.1 -u root -e "select user from mysql.user;"
-
-    - run: mysql -h 127.0.0.1 -uspring -pspring --database=springdb -e "show databases;"
 
     - restore_cache: # restore the saved cache after the first run or if `pom.xml` has changed
-        # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
-        key: circleci-wb-java-spring-{{ checksum "pom.xml" }}
+      # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
+      key: circleci-wb-java-spring-{{ checksum "pom.xml" }}
 
     - run: mvn dependency:go-offline # gets the project dependencies
 
@@ -43,8 +41,15 @@ jobs:
         # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
         path: target/surefire-reports
 
+#    - codecov/upload:
+#        file: {{ coverage_report_filepath }}
+
+    - run:
+        name: Build Success
+        when: on_success
+        command: bash <(curl -s https://codecov.io/bash)
 
         #    - store_artifacts: # store the uberjar as an artifact
         # Upload test summary for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
-    #        path: target/demo-java-spring-0.0.1-SNAPSHOT.jar
-    # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
+      #        path: target/demo-java-spring-0.0.1-SNAPSHOT.jar
+      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
