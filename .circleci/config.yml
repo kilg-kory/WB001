@@ -5,13 +5,16 @@ jobs:
   build:
     working_directory: ~/WB001
     docker: # use the docker executor type; machine and macos executors are also supported
+    - image: circleci/openjdk
+
+
+      #its service container image at localhost
     - image: circleci/mariadb
-#      environment:
+    #      environment:
     #        MYSQL_HOST: 127.0.0.1
     #        MYSQL_ALLOW_EMPTY_PASSWORD: true
     #        MYSQL_USER: root
     #        MYSQL_PASSWORD: ""
-    - image: circleci/openjdk
     #    - image: arey/mysql-client
     steps:
     - checkout # check out the code in the project directory
