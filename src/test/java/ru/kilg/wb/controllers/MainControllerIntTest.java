@@ -36,7 +36,7 @@ public class MainControllerIntTest {
 
     @Test
     public void getLoginPage() {
-        String template = mainController.getLogoutPage(model);
+        String template = mainController.getLoginPage(model);
         assertThat(template, is(equalTo("login")));
 
     }
