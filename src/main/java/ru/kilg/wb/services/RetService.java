@@ -1,4 +1,4 @@
-package ru.kilg.wb;
+package ru.kilg.wb.services;
 
 import org.springframework.stereotype.Service;
 
