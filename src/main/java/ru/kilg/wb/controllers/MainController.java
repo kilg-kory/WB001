@@ -11,11 +11,8 @@ import java.security.Principal;
 @Controller
 public class MainController {
 
-
     @RequestMapping("/iam")
-    public String getUserPage(Model model, Principal principal){
-        System.out.println(principal.getName());
-
+    public String getUserPage(){
         return "user";
     }
 
@@ -30,11 +27,7 @@ public class MainController {
     }
 
     @RequestMapping({"/", "", "/index", "/index.*"})
-    public String getIndexPage(Model model, Principal principal) {
-
-        if (principal != null)
-            System.out.println(principal.getName());
-
+    public String getIndexPage(Model model) {
 
         model.addAttribute("title", "");
         model.addAttribute("usercomm", new UserCommand());

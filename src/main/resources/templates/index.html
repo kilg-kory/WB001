@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml" lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{Layout}">
+
 <head>
-
-
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -20,6 +22,7 @@
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
             crossorigin="anonymous"></script>
 
+    <!--suppress JSCheckFunctionSignatures -->
     <script>
         $(function () {
 
@@ -77,12 +80,12 @@
 
 
     </style>
-
-
 </head>
-<body>
-<div class="container" style="padding-top: 10px">
 
+<body>
+
+<section layout:fragment="content">
+<div class="container" style="padding-top: 10px">
     <div class="row">
         <div class="col-md-6 col-lg-8">
             <!--
@@ -150,9 +153,9 @@
                     </ul>
                 </div>
                 <div class="card-body" id="register-form" style="display:none">
-                    <div class="card-title">
-                        <p th:if="${param.accoutError}" class="alert">Account already exist.</p>
-                    </div>
+                    <!--<div class="card-title">-->
+                        <!--<p th:if="${param.accoutError}" class="alert">Account already exist.</p>-->
+                    <!--</div>-->
 
                     <form th:action="@{/registration}" th:object="${usercomm}" class="form" method="POST">
                         <div class="form-group">
@@ -196,7 +199,7 @@
                 </div>
                 <div class="card-body" id="login-form">
                     <!--<p th:if="${param.logout}" class="alert">You have been logged out</p>-->
-                    <div class="card-title" th:if="${param.error}">There was an error, please try again</div>
+                    <!--<div class="card-title" th:if="${param.error}">There was an error, please try again</div>-->
                     <form th:action="@{/login}" class="form" method="POST">
                         <div class="form-group">
                             <label for="username">Username</label>
@@ -222,6 +225,13 @@
         </div>
     </div>
 </div>
+</section>
+<footer>
+    <p layout:fragment="custom-footer">This is some footer content from index page</p>
+</footer>
+
+
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
         integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
@@ -229,7 +239,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
         integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
         crossorigin="anonymous"></script>
-
 
 </body>
 </html>
