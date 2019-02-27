@@ -30,6 +30,7 @@ public class UserDetailsImplTest {
 
     private static final String STUB_PASSWORD = "12345";
     private static final String STUB_USERNAME = "Sample Samplovich";
+    public static final String STUB_ROLE = "ADMIN";
     @Mock
     User user;
 
@@ -54,13 +55,13 @@ public class UserDetailsImplTest {
         List<AuthGroup> authGroups = new ArrayList<>();
         AuthGroup authGroup = new AuthGroup();
         authGroup.setUsername("admin");
-        authGroup.setAuthGroup("ADMIN");
+        authGroup.setAuthGroup(STUB_ROLE);
         authGroups.add(authGroup);
 
         userDetails = new UserDetailsImpl(user, authGroups);
         authorities = userDetails.getAuthorities();
         assertEquals(authorities.size(), 1);
-        assertTrue(authorities.contains(new SimpleGrantedAuthority("ADMIN")));
+        assertTrue(authorities.contains(new SimpleGrantedAuthority(STUB_ROLE)));
     }
 
     @Test
