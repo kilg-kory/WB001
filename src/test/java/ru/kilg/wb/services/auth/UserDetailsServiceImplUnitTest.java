@@ -9,6 +9,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import ru.kilg.wb.domain.auth.AuthGroup;
 import ru.kilg.wb.domain.auth.User;
 import ru.kilg.wb.repositories.auth.AuthGroupRepository;
@@ -21,6 +22,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -48,6 +50,7 @@ public class UserDetailsServiceImplUnitTest {
         user.setUsername("Sample");
 
         when(userRepository.findByUsername(anyString())).thenReturn(user);
+        when(userRepository.findByUsername(eq("NoUser"))).thenReturn(null);
 
         List<AuthGroup> authGroups = new ArrayList<>();
         AuthGroup authGroup = new AuthGroup();
@@ -56,6 +59,12 @@ public class UserDetailsServiceImplUnitTest {
         authGroups.add(authGroup);
 
         when(authGroupRepository.findByUsername(anyString())).thenReturn(authGroups);
+    }
+
+    @Test(expected = UsernameNotFoundException.class)
+    public void loadUserByUsernameThrowableIfNull()  {
+        userDetailsService.loadUserByUsername("NoUser");
+
     }
 
     @Test
