@@ -12,7 +12,8 @@ public class AuthGroup {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    private String username;
+    @ManyToOne
+    private User user;
 
     private String authGroup;
 

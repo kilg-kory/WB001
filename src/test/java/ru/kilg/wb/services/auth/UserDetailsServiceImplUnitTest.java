@@ -1,5 +1,6 @@
 package ru.kilg.wb.services.auth;
 
+import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,6 +22,7 @@ import java.util.List;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.times;
@@ -54,11 +56,11 @@ public class UserDetailsServiceImplUnitTest {
 
         List<AuthGroup> authGroups = new ArrayList<>();
         AuthGroup authGroup = new AuthGroup();
-        authGroup.setUsername(STUB_USERNAME);
+        authGroup.setUser(user);
         authGroup.setAuthGroup(STUB_ROLE);
         authGroups.add(authGroup);
 
-        when(authGroupRepository.findByUsername(anyString())).thenReturn(authGroups);
+        when(authGroupRepository.findByUser(any(User.class))).thenReturn(authGroups);
     }
 
     @Test(expected = UsernameNotFoundException.class)
@@ -71,7 +73,7 @@ public class UserDetailsServiceImplUnitTest {
     public void loadUserByUsername() {
         UserDetails userDetails = userDetailsService.loadUserByUsername("Sample");
 
-        verify(authGroupRepository, times(1)).findByUsername(anyString());
+        verify(authGroupRepository, times(1)).findByUser(any(User.class));
         verify(userRepository, times(1)).findByUsername(anyString());
 
         assertThat(userDetails.getUsername(), is(equalTo(STUB_USERNAME)));

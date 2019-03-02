@@ -2,22 +2,32 @@ package ru.kilg.wb.domain.auth;
 
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
+@EqualsAndHashCode(exclude = "roles")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long Id;
+    private  Long id;
 
     @Column(nullable = false, unique = true)
     private String username;
 
     private String password;
 
+    private String name;
 
+    private String email;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<AuthGroup> roles;
+
+    private String confirmCode;
 
 }

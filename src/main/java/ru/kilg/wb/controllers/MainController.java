@@ -6,13 +6,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.kilg.wb.domain.dso.auth.UserCommand;
 
-import java.security.Principal;
-
 @Controller
 public class MainController {
 
     @RequestMapping("/iam")
-    public String getUserPage(){
+    public String getUserPage() {
         return "user";
     }
 

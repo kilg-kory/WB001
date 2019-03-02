@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+</head>
+<body>
+Reg form
+
+
+<form th:action="@{/registration}" th:object="${usercomm}" class="form" method="POST">
+    <div class="form-group">
+        <label for="name" th:for="${#ids.next('name')}">Username</label>
+        <input id="name" type="text" class="form-control" th:field="*{name}" required/>
+        <!--<div class="invalid-feedback">Oops, you missed this one.</div>-->
+    </div>
+    <div class="form-group">
+        <label for="email" th:for="${#ids.next('email')}">Email</label>
+        <input id="email" th:field="*{email}" type="email" class="form-control" required
+               name="email">
+        <!--<div class="invalid-feedback">You missed this one</div>-->
+    </div>
+    <div class="form-group">
+        <label for="login" th:for="${#ids.next('username')}">Login</label>
+        <input type="text" class="form-control" th:field="*{username}" required name="login"
+               id="login">
+        <!--<div class="invalid-feedback">You missed this one</div>-->
+    </div>
+    <div class="form-group">
+        <label for="password" th:for="${#ids.next('password')}">Password</label>
+        <input type="password" class="form-control" th:field="*{password}" required name="password"
+               id="password">
+        <!--<div class="invalid-feedback">You missed this one</div>-->
+    </div>
+    <div class="form-group">
+        <label for="confirmPassword" th:for="${#ids.next('confirmPassword')}">Confirm</label>
+        <input type="password" class="form-control" th:field="*{confirmPassword}" required
+               name="confirmPassword"
+               id="confirmPassword">
+        <!--<div class="invalid-feedback">You missed this one</div>-->
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="true" id="rrememberme"
+               name="remember-me">
+        <label class="form-check-label small text-dark" for="rrememberme">Remember me on this
+            computer</label>
+    </div>
+    <button type="submit" class="btn btn-success float-right" id="btnReg">Register</button>
+</form>
+</body>
+</html>

@@ -25,7 +25,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(s);
-        List<AuthGroup> authGroups = authGroupRepository.findByUsername(s);
+        List<AuthGroup> authGroups = authGroupRepository.findByUser(user);
 
         if (user == null) {
             throw new UsernameNotFoundException("Not found user - " + s);

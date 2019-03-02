@@ -3,8 +3,8 @@
     <user id="1" username="admin" password="admin" />
     <user id="2" username="user" password="user" />
 
-    <auth_group id="1" username="admin" auth_group="ADMIN" />
-    <auth_group id="2" username="admin" auth_group="USER" />
+    <auth_group id="1" user_id="1" auth_group="ADMIN" />
+    <auth_group id="2" user_id="1" auth_group="USER" />
 
-    <auth_group id="3" username="user" auth_group="USER" />
+    <auth_group id="3" user_id="2" auth_group="USER" />
 </dataset>

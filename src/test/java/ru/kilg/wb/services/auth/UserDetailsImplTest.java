@@ -52,9 +52,11 @@ public class UserDetailsImplTest {
         Collection<? extends GrantedAuthority> authorities = userDetails.getAuthorities();
         assertThat(authorities, is(equalTo(Collections.EMPTY_LIST)));
 
+
+
         List<AuthGroup> authGroups = new ArrayList<>();
         AuthGroup authGroup = new AuthGroup();
-        authGroup.setUsername("admin");
+        authGroup.setUser(user);
         authGroup.setAuthGroup(STUB_ROLE);
         authGroups.add(authGroup);
 

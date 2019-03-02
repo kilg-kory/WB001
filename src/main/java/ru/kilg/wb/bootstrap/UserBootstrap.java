@@ -33,7 +33,8 @@ public class UserBootstrap implements ApplicationListener<ContextRefreshedEvent>
 
         AuthGroup authGroup = new AuthGroup();
         authGroup.setAuthGroup("ADMIN");
-        authGroup.setUsername("admin");
+        authGroup.setUser(user);
+
 
         authGroupRepository.save(authGroup);
 
