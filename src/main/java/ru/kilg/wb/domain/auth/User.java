@@ -3,6 +3,7 @@ package ru.kilg.wb.domain.auth;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
 @Entity
 @Data
 @EqualsAndHashCode(exclude = "roles")
+@ToString(exclude = "roles")
 public class User {
 
     @Id

@@ -1,11 +1,15 @@
 package ru.kilg.wb.domain.auth;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
 
 @Data
 @Entity
+@EqualsAndHashCode(exclude = "user")
+@ToString(exclude = "user")
 public class AuthGroup {
 
     @Id
@@ -16,6 +20,4 @@ public class AuthGroup {
     private User user;
 
     private String authGroup;
-
-
 }

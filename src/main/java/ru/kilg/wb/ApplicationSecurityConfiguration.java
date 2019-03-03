@@ -2,8 +2,10 @@ package ru.kilg.wb;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -14,6 +16,10 @@ import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMap
 import org.springframework.security.core.authority.mapping.SimpleAuthorityMapper;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.web.authentication.RememberMeServices;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter;
+import org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
@@ -22,6 +28,10 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;
+
+    @Value("remember-me.key")
+    private String rememberMeKey;
+
 
     @Autowired
     public ApplicationSecurityConfiguration(@Qualifier("userDetailsServiceImpl") UserDetailsService userDetailsService) {
@@ -37,6 +47,18 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
         return provider;
     }
 
+    @Bean("authenticationManager")
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
+
+
+    @Bean
+    public RememberMeServices getRememberMeServices() {
+        //UUID.randomUUID().toString();
+        return new TokenBasedRememberMeServices(rememberMeKey, userDetailsService);
+    }
 
     @Bean
     public GrantedAuthoritiesMapper grantedAuthoritiesMapper() {
@@ -56,7 +78,7 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/", "/index", "/css/*", "/js/*") .permitAll()
+                .antMatchers("/", "/index", "/css/*", "/js/*").permitAll()
                 .antMatchers("/registration").not().authenticated()
                 .anyRequest().authenticated()
                 .and()
@@ -64,18 +86,14 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
                 .defaultSuccessUrl("/")
                 .loginPage("/login").permitAll()
                 .and()
+                .rememberMe()
+                .rememberMeServices(getRememberMeServices())
+                .and()
                 .logout().invalidateHttpSession(true).clearAuthentication(true)
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/logout-success").permitAll();
     }
 
 
-//    @Override
-//    @Bean
-//    public UserDetailsService userDetailsService() {
-//        List<UserDetails> users = new ArrayList<>();
-//        users.add(User.withDefaultPasswordEncoder().username("kilg").password("secret").roles("USER", "ADMIN").build());
-//        users.add(User.withDefaultPasswordEncoder().username("petrovich").password("vodka").roles("USER").build());
-//        return new InMemoryUserDetailsManager(users);
-//    }
+
 }

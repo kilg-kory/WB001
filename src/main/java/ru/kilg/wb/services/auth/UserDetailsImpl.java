@@ -25,9 +25,7 @@ public class UserDetailsImpl implements UserDetails {
         }
 
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-        authGroups.forEach(authGroup -> {
-            grantedAuthorities.add(new SimpleGrantedAuthority(authGroup.getAuthGroup()));
-        });
+        authGroups.forEach(authGroup -> grantedAuthorities.add(new SimpleGrantedAuthority(authGroup.getAuthGroup())));
 
         return grantedAuthorities;
     }

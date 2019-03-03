@@ -1,10 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Confirm</title>
 </head>
 <body>
-Reg confirm
+
+
+<p th:text="${message}"></p>
+Please insert confirm code from email here:
+<form method="get" action="/confirm">
+    <input type="text" name="code">
+    <button type="submit">Send</button>
+</form>
+
 </body>
 </html>

@@ -10,6 +10,8 @@ import ru.kilg.wb.exceptins.RegistrationException;
 import ru.kilg.wb.repositories.auth.AuthGroupRepository;
 import ru.kilg.wb.repositories.auth.UserRepository;
 
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -57,5 +59,21 @@ public class UserServiceImpl implements UserService {
 
 
         return userRepository.save(detachedUser);
+    }
+
+    @Override
+    public User getUserByUsername(String name) {
+        return userRepository.findByUsername(name);
+    }
+
+    @Override
+    public void saveUser(User user) {
+        userRepository.save(user);
+    }
+
+    @Override
+    public void deleteAllRoles(User user) {
+        List<AuthGroup> byUser = authGroupRepository.findByUser(user);
+        byUser.forEach(authGroup -> authGroupRepository.delete(authGroup));
     }
 }
