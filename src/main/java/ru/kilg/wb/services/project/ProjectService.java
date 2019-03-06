@@ -12,7 +12,7 @@ import java.util.Optional;
 
 /**
  * WB001
- * ProjectService - [Description]
+ * ProjectService - CRUD Project operations
  *
  * @author KIlG
  * @version 0.1

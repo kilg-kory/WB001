@@ -2,7 +2,6 @@ package ru.kilg.wb.domain.converters;
 
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import ru.kilg.wb.domain.dso.project.ProjectCommand;
 import ru.kilg.wb.domain.project.Project;
 

@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.kilg.wb.domain.project.Note;
-import ru.kilg.wb.domain.project.Project;
 import ru.kilg.wb.domain.project.Task;
 
 import javax.validation.constraints.NotBlank;
@@ -33,8 +32,10 @@ public class ProjectCommand {
     @Size(min = 4, max = 30)
     private String name;
 
+    //TODO: replace to ids
     private Note description;
 
+    //TODO: replace to ids
     private List<Task> tasks;
 
 

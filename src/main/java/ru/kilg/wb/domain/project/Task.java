@@ -1,7 +1,9 @@
 package ru.kilg.wb.domain.project;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
@@ -19,7 +21,9 @@ import javax.persistence.*;
 @Entity
 @Data
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Task extends Note{
+@NoArgsConstructor
+@AllArgsConstructor
+public class Task extends Note {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

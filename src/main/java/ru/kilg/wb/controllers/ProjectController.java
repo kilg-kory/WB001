@@ -61,10 +61,7 @@ public class ProjectController {
 
     @RequestMapping("/page/{page}/{limit}/{order}")
     public String getProjectsPageable(Model model, @PathVariable int page, @PathVariable int limit, @PathVariable String order) {
-        page--;
-        if (page < 0)
-            page = 0;
-
+        if (--page < 0) page = 0;
         Page<Project> projectPage = projectService.getPageProjects(page, limit, order);
         model.addAttribute("list", projectPage.getContent());
         return "project/list";

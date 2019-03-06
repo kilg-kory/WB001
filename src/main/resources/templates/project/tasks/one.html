@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{Layout}">
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>Task</title>
+</head>
+
+<body>
+
+<section layout:fragment="content">
+    <div>
+        <p th:text="${task.text}">
+            <span th:text="${task.name}">Task Name</span>
+            <span th:text="${task.status}">IGNORED</span>
+            <br />
+            Lorum ipsum task description </p>
+    </div>
+</section>
+
+</body>
+</html>
