@@ -1,8 +1,6 @@
 package ru.kilg.wb.domain.project;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -19,6 +17,8 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(exclude = {"description", "tasks"})
+@ToString(exclude = {"description", "tasks"})
 public class Project {
 
     @Id

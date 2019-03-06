@@ -13,12 +13,11 @@
 <body>
 
 <section layout:fragment="content">
+    size:  <span th:text="${list.size()}"></span>
     <div th:each="task : ${list}">
-        <p th:text="${task.text}">
-            <span th:text="${task.name}">Task Name</span>
-            <span th:text="${task.status}">IGNORED</span>
-            <br />
-            Lorum ipsum task description </p>
+        <span th:text="${task.name}">Task Name</span>
+        <span th:text="${task.status}">IGNORED</span>
+        <p th:text="${task.text}"></p>
     </div>
 </section>
 

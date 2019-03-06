@@ -16,7 +16,7 @@
 <section layout:fragment="content">
     <div>
         <!--/*@thymesVar id="tc" type="ru.kilg.wb.domain.dso.project.TaskCommand"*/-->
-        <form th:action="@{/project/tc.projectId/add}" th:object="${tc}" class="form" method="post">
+        <form th:action="@{/project/{pid}/task/add(pid=${tc.projectId})}" th:object="${tc}" class="form" method="post">
             <div class="form-group">
                 <label for="name" th:for="${#ids.next('name')}">Task Name: </label>
                 <input id="name" type="text" class="form-control" th:field="*{name}" required/>

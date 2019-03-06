@@ -14,7 +14,7 @@
 
 <section layout:fragment="content">
     <div  th:each="project: ${list}">
-        <span th:text="${project.name}">
+        <span th:text="${project.name}"></span>
         <p th:text="${project.description.text}"></p>
     </div>
 </section>

@@ -37,7 +37,7 @@ public class TaskController {
         this.taskCommandToTask = taskCommandToTask;
     }
 
-    @RequestMapping("/all")
+    @RequestMapping(value = {"all", "list"})
     public String getAllProjectTasks(Model model, @PathVariable Long projectId) {
         Project project = projectService.getProject(projectId);
         if (project == null)
@@ -70,6 +70,7 @@ public class TaskController {
             taskCommand.setProjectId(projectId);
         }
         taskService.saveTask(taskCommandToTask.convert(taskCommand));
-        return "redirect:/project/" + projectId + "/task";
+        return "redirect:/project/" + projectId + "/task/all" +
+                "";
     }
 }

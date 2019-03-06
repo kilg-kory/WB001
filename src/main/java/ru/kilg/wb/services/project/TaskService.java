@@ -35,7 +35,7 @@ public class TaskService {
     }
 
     public Task getTaskById(Long id) {
-        return taskRepository.getOne(id);
+        return taskRepository.findById(id).orElse(null);
     }
 
 

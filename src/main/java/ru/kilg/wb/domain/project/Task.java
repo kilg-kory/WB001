@@ -1,9 +1,6 @@
 package ru.kilg.wb.domain.project;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -17,12 +14,12 @@ import javax.persistence.*;
  * Create 05.03.19
  */
 
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = true, exclude = "project")
 @Entity
 @Data
-@Inheritance(strategy = InheritanceType.JOINED)
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(exclude = "project")
 public class Task extends Note {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
