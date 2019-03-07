@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}">
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>List Projects</title>
+</head>
+
+<body>
+
+<section layout:fragment="content">
+    <div  th:each="project: ${list}">
+        <span th:text="${project.name}"></span>
+        <p th:text="${project.description.text}"></p>
+    </div>
+</section>
+
+</body>
+</html>

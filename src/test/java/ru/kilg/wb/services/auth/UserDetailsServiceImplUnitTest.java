@@ -36,6 +36,7 @@ public class UserDetailsServiceImplUnitTest {
 
     private static final String STUB_USERNAME = "Sample";
     private static final String STUB_ROLE = "SAMPLE";
+    private static final String ROLE_PREFIX = "ROLE_";
 
     @Mock
     UserRepository userRepository;
@@ -77,7 +78,7 @@ public class UserDetailsServiceImplUnitTest {
         verify(userRepository, times(1)).findByUsername(anyString());
 
         assertThat(userDetails.getUsername(), is(equalTo(STUB_USERNAME)));
-        assertTrue(userDetails.getAuthorities().contains(new SimpleGrantedAuthority(STUB_ROLE)));
+        assertTrue(userDetails.getAuthorities().contains(new SimpleGrantedAuthority(ROLE_PREFIX+STUB_ROLE)));
 
     }
 }

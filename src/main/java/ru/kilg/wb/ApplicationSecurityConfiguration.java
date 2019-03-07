@@ -56,7 +56,6 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
 
     @Bean
     public RememberMeServices getRememberMeServices() {
-        //UUID.randomUUID().toString();
         return new TokenBasedRememberMeServices(rememberMeKey, userDetailsService);
     }
 
@@ -64,7 +63,7 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
     public GrantedAuthoritiesMapper grantedAuthoritiesMapper() {
         SimpleAuthorityMapper mapper = new SimpleAuthorityMapper();
         mapper.setConvertToUpperCase(true);
-        mapper.setDefaultAuthority("USER");
+        mapper.setDefaultAuthority("ROLE_USER");
         return mapper;
     }
 
@@ -79,6 +78,8 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
         http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/", "/index", "/css/*", "/js/*").permitAll()
+                .antMatchers("/project/**/*").permitAll()
+                .antMatchers("/project").permitAll()
                 .antMatchers("/registration").not().authenticated()
                 .anyRequest().authenticated()
                 .and()

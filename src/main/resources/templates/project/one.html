@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div>
+    <h4 th:text="${project.name}">Project Name</h4>
+    <p th:if="${project.description != null}" th:text="${project.description.text}"></p>
+
+    <div th:if="${project.tasks != null}" th:each="task :${project.tasks}">
+        <span th:text="${task.name}"></span>
+        <p th:text="${task.text}"></p>
+    </div>
+</div>
+
+</body>
+</html>

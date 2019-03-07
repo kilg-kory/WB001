@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+
+      lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}">
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>Add Task</title>
+</head>
+
+<body>
+
+<section layout:fragment="content">
+    <div>
+        <!--/*@thymesVar id="tc" type="ru.kilg.wb.domain.dso.project.TaskCommand"*/-->
+        <form th:action="@{/project/{pid}/task/add(pid=${tc.projectId})}" th:object="${tc}" class="form" method="post">
+            <div class="form-group">
+                <label for="name" th:for="${#ids.next('name')}">Task Name: </label>
+                <input id="name" type="text" class="form-control" th:field="*{name}" required/>
+            </div>
+            <div class="form-group" >
+                <select name="status">
+                    <option value="CREATED">CREATED</option>
+                    <option value="BEGAN">BEGAN</option>
+                    <option value="ENDED">ENDED</option>
+                    <option value="CLOSED">CLOSED</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <button type="submit">Save</button>
+            </div>
+        </form>
+    </div>
+</section>
+</body>
+</html>
