@@ -33,7 +33,7 @@ public class ProjectCommand {
     private String name;
 
     //TODO: replace to ids
-    private Note description;
+    private String description;
 
     //TODO: replace to ids
     private List<Task> tasks;

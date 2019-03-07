@@ -13,7 +13,7 @@ public class UserDetailsImpl implements UserDetails {
     private User user;
     private List<AuthGroup> authGroups;
 
-    public UserDetailsImpl(User user, List<AuthGroup> authGroups) {
+    UserDetailsImpl(User user, List<AuthGroup> authGroups) {
         this.user = user;
         this.authGroups = authGroups;
     }
@@ -25,7 +25,7 @@ public class UserDetailsImpl implements UserDetails {
         }
 
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-        authGroups.forEach(authGroup -> grantedAuthorities.add(new SimpleGrantedAuthority(authGroup.getAuthGroup())));
+        authGroups.forEach(authGroup -> grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_" + authGroup.getAuthGroup())));
 
         return grantedAuthorities;
     }

@@ -18,6 +18,7 @@ import ru.kilg.wb.domain.project.Project;
 public class ProjectToProjectCommand implements Converter<Project, ProjectCommand> {
     @Override
     public ProjectCommand convert(Project p) {
-        return new ProjectCommand(p.getId(), p.getName(), p.getDescription(), p.getTasks());
+
+        return new ProjectCommand(p.getId(), p.getName(), p.getDescription().getText(), p.getTasks());
     }
 }

@@ -53,7 +53,7 @@ public class ProjectController {
     }
 
 
-    @RequestMapping("/list")
+    @RequestMapping(value = {""})
     public String getAllProjects(Model model) {
         model.addAttribute("list", projectService.getAllProjects());
         return "project/list";

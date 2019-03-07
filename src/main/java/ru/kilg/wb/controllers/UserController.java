@@ -9,6 +9,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.RememberMeServices;
 import org.springframework.stereotype.Controller;
@@ -95,22 +96,21 @@ public class UserController {
             currentUser.setRoles(groupList);
             userService.saveUser(currentUser);
 
-            context.getAuthentication().setAuthenticated(false);
+//            context.getAuthentication().setAuthenticated(false);
 
             /* ************************************************************************************
-             *how to relogin by code? or activate new roles...
-             * almost done, but securing don't see role.
-             * maybe prefix ROLE_?
-             * debug debug debug
+            auto relogin for user with new authorises. add role_user and activate it
              **************************************************************************************/
-//            UserDetails userDetails = userDetailsService.loadUserByUsername(currentUser.getUsername());
-//            Authentication newAuth = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-//            context.setAuthentication(newAuth);
-//            HttpSession session = request.getSession(true);
-//            session.setAttribute("SPRING_SECURITY_CONTEXT", context);
+            UserDetails userDetails = userDetailsService.loadUserByUsername(currentUser.getUsername());
+            Authentication newAuth = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+            context.setAuthentication(newAuth);
+            HttpSession session = request.getSession(true);
+            session.setAttribute("SPRING_SECURITY_CONTEXT", context);
 
-            model.addAttribute("message", "success. please relogin <a href=\"/\">Main</a>");
-            return "registration/success";
+//            model.addAttribute("message", "success. please relogin <a href=\"/\">Main</a>");
+//            return "registration/success";
+            return "redirect:/iam";
+
         } else {
             model.addAttribute("message", "Not equal code");
             return "registration/confirm";

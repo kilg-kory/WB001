@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
       lang="en"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{Layout}">
+      layout:decorate="~{layout.html}">
 
 
 <head>
@@ -14,11 +14,10 @@
 
 <section layout:fragment="content">
     <div>
-        <p th:text="${task.text}">
-            <span th:text="${task.name}">Task Name</span>
-            <span th:text="${task.status}">IGNORED</span>
-            <br />
-            Lorum ipsum task description </p>
+        <h4>Task:</h4>
+        <span th:text="${task.name}">Task Name</span>
+        <span th:text="${task.status}">IGNORED</span>
+        <p th:text="${task.text}">Lorum ipsum task description </p>
     </div>
 </section>
 
