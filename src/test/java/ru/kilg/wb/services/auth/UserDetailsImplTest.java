@@ -31,6 +31,7 @@ public class UserDetailsImplTest {
     private static final String STUB_PASSWORD = "12345";
     private static final String STUB_USERNAME = "Sample Samplovich";
     public static final String STUB_ROLE = "ADMIN";
+    private static final String ROLE_PREFIX = "ROLE_";
     @Mock
     User user;
 
@@ -63,7 +64,7 @@ public class UserDetailsImplTest {
         userDetails = new UserDetailsImpl(user, authGroups);
         authorities = userDetails.getAuthorities();
         assertEquals(authorities.size(), 1);
-        assertTrue(authorities.contains(new SimpleGrantedAuthority(STUB_ROLE)));
+        assertTrue(authorities.contains(new SimpleGrantedAuthority(ROLE_PREFIX + STUB_ROLE)));
     }
 
     @Test
